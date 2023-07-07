@@ -1,0 +1,24 @@
+CREATE DATABASE BooksInfo;
+USE BooksInfo;
+CREATE TABLE Books (id INT AUTO_INCREMENT PRIMARY KEY,title VARCHAR(100),
+  author VARCHAR(100),genre VARCHAR(50),publication_year INT ,price INT);
+INSERT INTO Books VALUES(001,'To Kill a Mockingbird', 'Harper Lee', 'Classic', 1960, 120);
+INSERT INTO Books VALUES(002,'1984', 'George Orwell', 'Dystopian', 1949, 230);
+INSERT INTO Books VALUES(003,'The Great Gatsby', 'F. Scott Fitzgerald', 'Classic', 1925, 200);
+INSERT INTO Books VALUES(004,'The Catcher in the Rye', 'J.D. Salinger', 'Coming-of-age', 1951, 250);
+INSERT INTO Books VALUES(005,'Harry Potter and the Sorcerer''s Stone', 'J.K. Rowling', 'Fantasy', 1997, 300);
+SELECT * FROM Books;
+SELECT * FROM Books WHERE title = '1984';
+UPDATE Books SET price = 270 WHERE title = 'The Great Gatsby';
+DELETE FROM Books WHERE title = 'The Catcher in the Rye';
+SELECT AVG(price) AS average_price FROM Books;
+CREATE TABLE Authors (id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(100));
+INSERT INTO Authors VALUES(01,'Harper Lee');
+INSERT INTO Authors VALUES(02,'George Orwell');
+INSERT INTO Authors VALUES(03,'F. Scott Fitzgerald');
+INSERT INTO Authors VALUES(04,'J.D. Salinger');
+INSERT INTO Authors VALUES(05,'J.K. Rowling');
+SELECT*FROM Authors;
+ALTER TABLE Books ADD COLUMN author_id INT;
+ALTER TABLE Books ADD CONSTRAINT fk_author FOREIGN KEY (author_id) REFERENCES Authors(id);
+SELECT Books.title, Authors.name AS author FROM Books JOIN Authors ON Books.author_id = Authors.id;
